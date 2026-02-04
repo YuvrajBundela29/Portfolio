@@ -12,12 +12,11 @@ export default function hello(
   };
 
   const app = (args: string[], options: string[]) => {
-    if (options.find((o) => o === "-h" || o === '-help')) {
-      print(`\n${docs.name} – ${docs.short}`);
-      return;
-    }
+    print(`
+Hello, visitor.
+Welcome to my system.
 
-    print("\nHello, world!");
+Type **help** to explore.`);
   };
   return { docs, app };
 }

@@ -221,6 +221,9 @@ export default function WebGL() {
     computerGroup.rotation.y = controlProps.computerAngle;
     scene.add(computerGroup);
 
+
+
+
     /**
      * Animate
      */
@@ -264,6 +267,9 @@ export default function WebGL() {
       if (sizes.portraitOffset > 0.5)
         computerGroup.rotation.z = valMap(scroll, [0, 1], [-Math.PI / 2, 0]);
       else computerGroup.rotation.z = 0;
+
+
+
 
       if (assists.crtMesh.morphTargetInfluences) {
         assists.crtMesh.morphTargetInfluences[0] = valMap(

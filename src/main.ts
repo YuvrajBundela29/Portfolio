@@ -1,7 +1,9 @@
 import "./main.css";
 import WebGL from "./webgl";
+import { initAnimations } from "./animations";
 
 WebGL();
+initAnimations();
 
 const root = document.documentElement;
 

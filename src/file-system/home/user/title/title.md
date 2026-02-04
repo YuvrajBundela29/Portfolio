@@ -1,16 +1,15 @@
-!(/images/ed-title.png?aspect=2&noflow=true&width=1.33)
+!(/images/yuvraj-face.png?aspect=1.0&noflow=true&width=0.7&align=right)
 
 
 ##   Hi there, 
 
-#  *I'm Ed H*
+#  *I'm Yuvraj*
 
-##   • Software Engineer
-##   • Digital Designer
-
-
+##   • AI Engineer
+##   • Cybersecurity
 
 
 
-### Welcome to ED-Linux 1.0 LTS
+
+### Welcome to YSB-Linux 1.0 LTS
 ### →→ Scroll or type "help" to get started

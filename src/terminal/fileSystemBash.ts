@@ -57,6 +57,7 @@ generateFS(
 console.log(disk);
 
 
+// Force HMR update
 export default function FileSystemBash() {
   function _pathStrToArr(p: string) {
     const pathArray = p.split("/");

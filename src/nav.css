@@ -2,100 +2,128 @@ nav {
   position: fixed;
   top: 0px;
   left: 0px;
-  background-color: antiquewhite;
+  background-color: transparent;
+  /* Clean start */
   width: 0px;
   z-index: 5;
 }
 
 .menu-btn {
   position: fixed;
-  padding: 20px;
+  padding: 24px;
   top: 0;
   left: 0;
   right: 0;
   display: flex;
-  gap: 0px;
-  transition: all 0.7s;
-  z-index: 1;
+  gap: 12px;
+  /* Better spacing */
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 11;
+  /* Above overlay */
   justify-content: space-between;
-
   pointer-events: none;
 }
 
 nav .btn {
-  opacity: 0;
-  pointer-events: none;
-  padding: 8px 16px;
-  fill: #f6d4b1;
+  opacity: 1;
+  pointer-events: all;
+  padding: 10px 18px;
+
+  /* Hardware Look */
+  background-color: rgba(11, 11, 11, 0.8);
+  border: 1px solid rgba(224, 224, 224, 0.2);
+  backdrop-filter: blur(4px);
+  border-radius: 4px;
+
+  fill: var(--color);
+  /* Retro White */
+  color: var(--color);
+
+  transition: all 0.3s ease-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
-.menu-btn > .btn:first-child {
-  padding: 8px 24px;
+.menu-btn>.btn:first-child {
+  padding: 10px 24px;
   margin-right: 16px;
+  border-color: rgba(255, 176, 0, 0.3);
+  /* Premium Accent Hint */
 }
 
 nav svg {
-  transition: all 0.2s;
+  transition: all 0.3s;
+  fill: inherit;
 }
 
-html[data-scroll="true"] nav .btn {
-  opacity: 1;
-  pointer-events: all;
+nav .btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--premium-accent);
+  box-shadow: 0 0 12px rgba(255, 176, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.5);
+  fill: var(--premium-accent);
 }
 
 .active .btn {
-  box-shadow: 6px 6px 0px rgba(246, 212, 177, 0.7);
-  background-color: #f6d4b1;
-  color: #525252;
-  fill: #525252;
-  border-color: #525252;
-  opacity: 1 !important;
-  pointer-events: all !important;
-}
-
-.active .btn:hover {
-  box-shadow: 8px 8px 6px rgba(246, 212, 177, 0.5);
-}
-
-.active .btn:active {
-  box-shadow: 4px 4px 0px rgba(246, 212, 177, 0.7);
+  background-color: var(--premium-accent);
+  color: #0b0b0b;
+  fill: #0b0b0b;
+  border-color: var(--premium-accent);
+  box-shadow: 0 0 15px rgba(255, 176, 0, 0.4);
 }
 
 .menu-body {
-  background-color: #525252;
-  color: #f6d4b1;
+  /* Dark Glassmorphism Overlay */
+  background-color: rgba(11, 11, 11, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  color: var(--color);
   font-size: 2em;
   font-family: "public-pixel", monospace;
   text-decoration: none !important;
+
   position: fixed;
   top: 0px;
   bottom: 0px;
   left: -100px;
   right: 100vw;
-  z-index: 0;
-  transition: all 0.7s;
+  z-index: 10;
+
+  /* Engineered Transition */
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+
   display: inline-flex;
-  gap: 16px;
+  gap: 24px;
   flex-direction: column;
-  padding-top: 70px;
-  padding-left: 20px;
+  padding-top: 100px;
+  padding-left: 40px;
   overflow: hidden;
   box-sizing: border-box;
   opacity: 0;
+  pointer-events: none;
 }
 
 .menu-body a {
   text-decoration: none !important;
+  color: var(--soft-text);
+  transition: color 0.3s, transform 0.3s;
+  display: inline-block;
+  transform-origin: left;
 }
 
 .menu-body a:hover {
-  transform: none;
+  color: var(--premium-accent);
+  transform: scale(1.05);
+  /* Subtle scale */
+  text-shadow: 0 0 8px rgba(255, 176, 0, 0.3);
 }
 
 .active .menu-body {
   left: 0px;
   right: 0px;
   opacity: 1;
+  pointer-events: all;
+  width: 100vw;
+  height: 100vh;
 }
 
 #tip-scroll {

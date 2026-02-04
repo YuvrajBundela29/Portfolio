@@ -678,14 +678,28 @@ export default function ScreenTextEngine(
       new THREE.MeshBasicMaterial({ color: 0x000000 })
     );
 
-    imageFrame.position.set(1.4 / 2, -height * 0.5 - charNextLoc.y, -0.02);
+    let xPos = 1.4 / 2; // Default center
+    if (params.get("align") === "right") {
+      xPos = 1.55 - width / 2; // Extreme right align (pushed further)
+    }
+
+    imageFrame.position.set(xPos, -height * 0.5 - charNextLoc.y, -0.02);
     if (!params.get("noflow")) charNextLoc.y += height;
     rootGroup.add(imageFrame);
 
     const textureLoader = new THREE.TextureLoader();
     textureLoader.load(url, (tex) => {
+      // Retro pixelated look for the halftone image
       tex.magFilter = THREE.NearestFilter;
-      imageFrame.material = new THREE.MeshBasicMaterial({ map: tex });
+      tex.minFilter = THREE.NearestFilter;
+      tex.anisotropy = 1;
+      tex.encoding = THREE.sRGBEncoding;
+
+      imageFrame.material = new THREE.MeshBasicMaterial({
+        map: tex,
+        color: 0xffffff, // Full brightness for the pre-styled image
+        transparent: true
+      });
     });
   }
 

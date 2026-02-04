@@ -1,5 +1,6 @@
 import FileSystemBash from "./fileSystemBash";
 import Applications from "./applications";
+import { resolveCommand } from "./smartLogic/smartRouter";
 
 type Cmd = {
   docs: {
@@ -35,7 +36,7 @@ export default function Bash(print: (s: string, md?: boolean) => void) {
   }
 
   function cmdNotFound(cmdName: string) {
-    print(`\n${cmdName}:command not found`);
+    print(`\nCommand not recognized.\nType **help** to view available commands.`);
   }
 
   function prompt() {
@@ -49,19 +50,50 @@ export default function Bash(print: (s: string, md?: boolean) => void) {
     print(`\nuser:${out}$`);
   }
 
-  function input(cmd: string) {
-    cmd = cmd.replaceAll(/\s+/g, " ");
-    const cmdSplit = cmd.split(" ");
-    const cmdName = cmdSplit[0];
-    const cmdArgs: string[] = cmdSplit.slice(1);
-    console.log("cmd", cmdName, cmdArgs);
+  function input(rawCmd: string) {
+    if (!rawCmd || rawCmd.trim() === "") {
+      prompt();
+      return;
+    }
 
-    if (cmd) {
-      const app = getApp(cmdName);
-      if (app) {
-        const [args, options] = splitArgs(cmdArgs);
-        app(args, options);
-      } else cmdNotFound(cmdName);
+    // Smart Routing
+    const { cmd, args: resolvedArgs } = resolveCommand(rawCmd);
+
+    // Fallback logic if needed, but resolveCommand handles most normalization
+    // resolveCommand returns 'cmd' which is the canonical command key.
+
+    // We still need to handle args if the user typed "command arg1 -opt" 
+    // BUT resolveCommand logic splits by space.
+    // However, for standard commands not in the map, resolveCommand just splits internal implementation.
+    // Let's verify resolveCommand logic I wrote:
+    // It returns { cmd: parts[0], args: parts.slice(1) } if not found in map.
+    // If found in map (e.g. "who are you" -> "whoami"), args is empty.
+
+    // So we can blindly use cmd and args from logic, BUT if there are additional args passed to a mapped command (unlikely for "who are you"), we might lose them.
+    // The user requirement said inputs are strict or natural language phrases.
+    // "sudo hire yuvraj" -> resolveCommand("sudo hire yuvraj") -> cmd: "sudo", args: ["hire", "yuvraj"] (unless mapped).
+    // My smartRouter map: "hire you" -> "contact".
+    // So "sudo hire yuvraj" is not in the map?
+    // Wait, let's check smartRouter.ts content again.
+
+    /* 
+       const parts = normalized.split(" ");
+       const cmd = parts[0];
+       const args = parts.slice(1);
+    */
+
+    // So "sudo hire yuvraj" -> cmd="sudo", args=["hire", "yuvraj"].
+    // This works perfectly for sudo command handling I wrote in misc.ts.
+
+    const app = getApp(cmd);
+    if (app) {
+      // applications.ts expects (args, options).
+      // My resolveCommand separates cmd and args, but doesn't distinguish options (starting with -).
+      // So I should use splitArgs on the resolvedArgs.
+      const [finalArgs, finalOptions] = splitArgs(resolvedArgs);
+      app(finalArgs, finalOptions);
+    } else {
+      cmdNotFound(rawCmd);
     }
 
     prompt();

@@ -1,22 +1,24 @@
 {
   "author": {
-    "name": "Ed Hinrichsen",
-    "url": "https://www.edwardh.io"
+    "name": "Yuvraj Singh Bundela",
+    "url": "https://github.com/YuvrajBundela29"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/edhinrichsen/retro-computer-website.git"
+    "url": "git+https://github.com/YuvrajBundela29/retro-computer-website.git"
   },
   "license": "MIT",
   "name": "retro-computer-website",
   "version": "1.0.0",
   "type": "module",
+  "description": "Personal Website of Yuvraj Singh Bundela - AI & Cybersecurity Engineer",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "gsap": "^3.14.2",
     "lil-gui": "^0.11.0",
     "stats.js": "^0.17.0",
     "three": "^0.134.0"

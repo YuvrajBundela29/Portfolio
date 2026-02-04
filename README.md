@@ -1,6 +1,7 @@
 # Retro Computer Personal Website
 
-![Portfolio Preview](https://ibb.co/BHDkJR1W)
+![Cybersecurity Profile](public/images/readme-preview-1.png)
+![Retro Computer Setup](public/images/readme-preview-2.png)
 
 A highly interactive, retro-themed personal portfolio website inspired by the aesthetics of old-school computing. This project combines 3D graphics, a functional terminal, and a nostalgic design system to showcase my work as an AI & Cybersecurity Engineer.
 
